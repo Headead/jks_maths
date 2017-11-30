@@ -11,5 +11,13 @@ pipeline {
         sh 'go test'
       }
     }
+    stage('Deploy') {
+        agent none
+        steps {
+            script {
+                def customImage = docker.build("headead/jks_maths:${env.BUILD_NUMBER}")
+            }
+        }
+    }
   }
 }
